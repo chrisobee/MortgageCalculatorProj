@@ -21,7 +21,7 @@ public class Main {
         String monthlyPayment = calculateMortgagePayments(principal,monthlyInterestRate,totalPayments);
         System.out.println("MORTGAGE\n--------");
         System.out.println("Monthly Payments: " + monthlyPayment);
-
+        displayPaymentSchedule(principal, monthlyInterestRate, totalPayments);
     }
 
     public static double readNumber(String prompt, double min, double max){
@@ -47,8 +47,10 @@ public class Main {
 
     public static void displayPaymentSchedule(double principal, double monthlyInterestRate, int totalPayments){
         System.out.println("Payment Schedule\n----------------");
-        for (int i = 0; i < totalPayments; i++) {
-            
+        double currentBalance = 0;
+        for (int i = 1; i <= totalPayments; i++) {
+            currentBalance = principal * ((Math.pow((1 + monthlyInterestRate), totalPayments) - (Math.pow((1 + monthlyInterestRate),i)))/((Math.pow((1 + monthlyInterestRate),totalPayments) - 1)));
+            System.out.println(NumberFormat.getCurrencyInstance().format(currentBalance));
         }
     }
 }
